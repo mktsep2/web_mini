@@ -6,7 +6,7 @@
 <html>
 	<%@ include file = "layout/head.jsp" %>
 <body>
-	<%@ include file = "layout/header.jsp" %>
+	<%@ include file = "layout/sidebar.jsp" %>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:340px;margin-right:40px">
