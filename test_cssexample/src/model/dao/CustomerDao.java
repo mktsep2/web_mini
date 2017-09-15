@@ -22,6 +22,32 @@ public class CustomerDao {
 //			e.printStackTrace();
 //		}
 //	}
+	
+	public static CustomerVo loginUser(String id, String pw) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT * FROM customer WHERE id = ? and password = ?";
+		CustomerVo cvo = null;
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				cvo = new CustomerVo(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4));
+			}
+		} catch (SQLException s) {
+			s.printStackTrace();
+			throw s;
+		} finally {
+			DBUtil.close(con, pstmt, rset);
+		}
+		return cvo;
+	}
 
 	public static void insert(CustomerVo cvo) throws SQLException {
 		Connection con = null;
