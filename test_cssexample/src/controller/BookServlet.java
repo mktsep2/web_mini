@@ -35,7 +35,7 @@ public class BookServlet extends HttpServlet {
 			ArrayList<BookVo> allList = BookDao.getBooks();	
 			System.out.println(allList);
 			request.setAttribute("allList", allList);
-			url = "asdasdasd.jsp";
+			url = "booklist.jsp";
 			
 		} catch (SQLException e) {			
 			request.setAttribute("error", "sad");
