@@ -37,9 +37,10 @@ public class CustomerDao {
 			pstmt.executeUpdate();
 			rset = pstmt.executeQuery();
 			
-			while (rset.next()) {
+			if(rset.next()) {
 				cvo = new CustomerVo(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4));
 			}
+			
 		} catch (SQLException s) {
 			s.printStackTrace();
 			throw s;

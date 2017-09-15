@@ -64,6 +64,7 @@ public class CustomerServlet extends HttpServlet {
 		try {			
 			CustomerVo cvo = CustomerDao.loginUser(id, pw);		
 			if (cvo.getId().equals(id) && cvo.getPassword().equals(pw)) {
+				System.out.println(cvo);
 				session.setAttribute("cvo", cvo);
 //				request.setAttribute("cvo", cvo);
 				url = "loginUser.jsp";
