@@ -5,6 +5,8 @@
 <html>
 <%
 	CustomerVo cvo=(CustomerVo) session.getAttribute("cvo");
+	String id = (String) session.getAttribute("id");
+	System.out.println("id" + id);
 	String name=cvo.getName();
 %>
 <head>
@@ -24,10 +26,15 @@
    					<div class="w3-dropdown-content w3-bar-block w3-whitee">
    					
    						<form action="updateUser.jsp">
-   							<input type="hidden" name="id" value="${requestScope.id}">
+   							<input type="hidden" name="id" value="${session.id}">
    							<button class="w3-button" type="submit">Á¤º¸¼öÁ¤</button>
    						</form>
    						<a href="index.html" class="w3-button">·Î±×¾Æ¿ô</a>
+   						<form action="cust" method="post">
+   							<input type="hidden" name="id" value="${id}">
+   							<input type="hidden" value="delete"  name="command">
+   							<button class="w3-button" type="submit">Å»ÅðÇÏ±â${session.id}</button>
+   						</form>
      				</div>
 				</div> 
 			</div>

@@ -6,7 +6,7 @@
 <html>
 	<%@ include file = "layout/head.jsp" %>
 <body>
-	<%@ include file = "layout/sidebarUser.jsp" %>
+	<%@ include file = "layout/sidebar.jsp" %>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:340px;margin-right:40px">
@@ -14,7 +14,7 @@
   		<!-- Header -->
   		<div class="w3-container  w3-center" style="margin-top:80px;" id="showcase">
     		<h1 class="w3-jumbo"><img src = "bok.png"><b>LIBRARY</b></h1>
-    		<h1 class="w3-xxxlarge w3-text-gray"><b>&nbsp;&nbsp;회원정보수정</b>
+    		<h1 class="w3-xxxlarge w3-text-gray"><b>&nbsp;&nbsp;회원가입</b>
     		</h1>
    
     		<hr style="width:100%; border:5px solid lightgray" class="w3-round">
@@ -29,21 +29,19 @@
 		  <tr>
 			<td width=30%>아이디</td>
 			<td width=70%>	
-				<%= cvo.getId() %>
-				<input type="hidden" name="id" value="<%= cvo.getId() %>">			
+				<input type="text" name="id" placeholder="id">			
 			</td>
 		  </tr>
 		  <tr>
 			<td width="30%">이름</td>
 			<td width="70%">	
-				<%= cvo.getName() %>	
-				<input type="hidden" name="name" value="<%= cvo.getName() %>">			
+				<input type="text" name="name" placeholder="name">			
 			</td>
 		  </tr>
 		  <tr>
 			<td width="30%">비밀번호</td>
 			<td width="70%">
-				<input type="password" name="password" value="<%= cvo.getPassword() %>">
+				<input type="password" name="password" placeholder="password">
 			</td>
 		  </tr>			  
 		
@@ -51,7 +49,7 @@
 		
 			<td width="30%">이메일</td>
 			<td width="70%">
-				<input type="email" name="email" value="<%= cvo.getEmail() %>">
+				<input type="email" name="email" placeholder="email">
 			</td>		  
 		  <tr>				  
 	</table>
@@ -64,13 +62,11 @@
 	<div class="w3-container w3-display-container w3-center" style="margin-top:150px;margin-right:300px;" id="showcase">
 	<div class="w3-display-bottomright">
 	<button class="w3-button w3-hover-gray w3-white"" type="reset">취소</button>
-	<input type="hidden" value="update"  name="command">
-	<button class="w3-button w3-hover-gray w3-white" type="submit">수정</button>
+	<input type="hidden" value="insert"  name="command">
+	<button class="w3-button w3-hover-gray w3-white" type="submit">가입</button>
 	</div>
 	</div>
-
 </form>
- 
  	</div>
  	
  	
