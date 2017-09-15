@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.dao.CustomerDao;
 import model.vo.CustomerVo;
@@ -47,8 +48,38 @@ public class CustomerServlet extends HttpServlet {
 			update(request, response);
 		}else if(command.equals("allView")){
 			getCustomers(request, response);
+		}else if(command.equals("loginUser")){
+			loginUser(request, response);
 		}
 	}
+	
+	public void loginUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("userid").trim();
+		String pw = request.getParameter("userpw").trim();
+		HttpSession	session = request.getSession();
+		System.out.println(id);
+		System.out.println(pw);
+		
+		String url = null;	
+		try {			
+			CustomerVo cvo = CustomerDao.loginUser(id, pw);		
+			if (cvo.getId().equals(id) && cvo.getPassword().equals(pw)) {
+				session.setAttribute("cvo", cvo);
+//				request.setAttribute("cvo", cvo);
+				url = "loginUser.jsp";
+			} else {
+				request.setAttribute("error", "아이디나 비밀번호가 올바르지 않습니다.");
+				url = "/error.jsp";
+			}
+		} catch (SQLException e) {		
+			request.setAttribute("error", "로그인 실패");
+			url = "error.jsp";
+			e.printStackTrace();
+		}
+		RequestDispatcher rdp = request.getRequestDispatcher(url);		
+		rdp.forward(request, response);
+	}
+	
 	/** insert -> db에 저장 -> select후 -> 저장한 정보 보기 
 	 * 회원 가입 메소드 
 	 * 1. Client가 보내온 데이터를 받아 DAO를 통해 DB에 입력한다.
@@ -156,7 +187,7 @@ public class CustomerServlet extends HttpServlet {
 			ArrayList<CustomerVo> allList = CustomerDao.getCustomers();		
 			System.out.println(allList);
 			request.setAttribute("allList", allList);
-			url = "list.jsp";
+			url = "asdasdasd.jsp";
 			
 		} catch (SQLException e) {			
 			request.setAttribute("error", "모든 고객 검색 실패");

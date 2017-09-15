@@ -6,14 +6,14 @@
 <html>
 	<%@ include file = "layout/head.jsp" %>
 <body>
-	<%@ include file = "layout/sidebar.jsp" %>
+	<%@ include file = "layout/sidebarUser.jsp" %>
 
 	<!-- !PAGE CONTENT! -->
 	<div class="w3-main" style="margin-left:340px;margin-right:40px">
 
   		<!-- Header -->
   		<div class="w3-container  w3-center" style="margin-top:80px;" id="showcase">
-    		<h1 class="w3-jumbo"><b>LIBRARY</b></h1>
+    		<h1 class="w3-jumbo"><img src = "bok.png"><b>LIBRARY</b></h1>
     		<h1 class="w3-xxxlarge w3-text-gray"><b>도서정보</b>
     		</h1>
    
@@ -21,15 +21,17 @@
    
   			<!-- Photo grid (modal) -->
   			<div class="w3-row">
-    			<div class="w3-half" >
-      				<img src="images/book758.jpg"  style="width:30%; padding:10px" onclick="onClick(this)" alt="asdasd3<br>짜증난다">
-      				<img src="images/book757.jpg"  style="width:30%; padding:10px" onclick="onClick(this)" alt="Light, white and tight scandinavian design">
-      				<img src="images/book756.jpg" style="width:30%; padding:10px" onclick="onClick(this)" alt="White walls with designer chairs">
+    			<div class="w3-third" >
+      				<img src="images/book758.jpg"  style="width:49%; padding:10px" onclick="onClick(this)" alt="asdasd3<br>짜증난다">
+      				<img src="images/book757.jpg"  style="width:49%; padding:10px" onclick="onClick(this)" alt="Light, white and tight scandinavian design">
     			</div>
-      			<div class="w3-half" >
-      				<img src="images/book755.jpg" style="width:30%; padding:10px" onclick="onClick(this)" alt="Windows for the atrium">
-      				<img src="images/book754.jpg" style="width:30%; padding:10px" onclick="onClick(this)" alt="Bedroom and office in one space">
-      				<img src="images/book753.jpg" style="width:30%; padding:10px" onclick="onClick(this)" alt="Scandinavian design">
+    			<div  class="w3-third">
+      				<img src="images/book756.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="White walls with designer chairs">
+      				<img src="images/book755.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="Windows for the atrium">
+    			</div>
+      			<div class="w3-third" >
+      				<img src="images/book754.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="Bedroom and office in one space">
+      				<img src="images/book753.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="Scandinavian design">
  				</div>
   			</div>
  	 	</div>
