@@ -156,7 +156,7 @@ public class CustomerServlet extends HttpServlet {
 			ArrayList<CustomerVo> allList = CustomerDao.getCustomers();		
 			System.out.println(allList);
 			request.setAttribute("allList", allList);
-			url = "list.jsp";
+			url = "asdasdasd.jsp";
 			
 		} catch (SQLException e) {			
 			request.setAttribute("error", "모든 고객 검색 실패");

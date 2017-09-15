@@ -40,9 +40,10 @@
 					<div class="w3-section">
 						<label><b>Username</b></label> <input
 							class="w3-input w3-border w3-margin-bottom" type="text"
-							placeholder="Enter Username" name="usrname" required> <label><b>Password</b></label>
+							placeholder="Enter Username" name="username" required> 
+						<label><b>Password</b></label>
 						<input class="w3-input w3-border" type="text"
-							placeholder="Enter Password" name="psw" required>
+							placeholder="Enter Password" name="userpw" required>
 						<input type="hidden" name="command" value="allView">
 						<button class="w3-button w3-block w3-sky w3-section w3-padding w3-round-large w3-hover-gray"
 							type="submit">Login</button>
