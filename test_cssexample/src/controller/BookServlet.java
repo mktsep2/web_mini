@@ -24,14 +24,15 @@ public class BookServlet extends HttpServlet {
 		process(request, response);
 	}
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		getCustomers(request, response);
+		
+		
+		getBookData(request, response);
 	}
 	
-	public void getCustomers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void getBookData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = null;		
 		try {			
-			ArrayList allList = BookDao.getBooks();	
+			ArrayList<BookVo> allList = BookDao.getBooks();	
 			System.out.println(allList);
 			request.setAttribute("allList", allList);
 			url = "asdasdasd.jsp";

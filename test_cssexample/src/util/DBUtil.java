@@ -8,13 +8,10 @@ import java.sql.Statement;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;//cp기능 활용
+import javax.sql.DataSource;//cp占쏙옙占� 활占쏙옙
 
-/**
- * driver 로딩 Connection 객체 반환 -CP기능을 반영 자원 반환 최적화 최상의 기능 만들기
- */
 public class DBUtil {
-	static DataSource ds;      // DataSource만 주구장창 살아있으면 된다. 
+	private static DataSource ds; 
 
 	static {
 		Context initContext;
@@ -32,7 +29,7 @@ public class DBUtil {
 		return ds.getConnection();
 	}
 	//select
-	public static void close(Connection con,Statement stmt,ResultSet rset){ //if절의 검증시간도 고려!!
+	public static void close(Connection con,Statement stmt,ResultSet rset){
 		if(rset!=null){
 			try {
 				rset.close();
