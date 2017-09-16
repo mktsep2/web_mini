@@ -62,16 +62,18 @@ public class CustomerServlet extends HttpServlet {
 		
 		String url = null;	
 		try {			
-			CustomerVo cvo = CustomerDao.loginUser(id, pw);		
-			if (cvo.getId().equals(id) && cvo.getPassword().equals(pw)) {
-				System.out.println(cvo);
-				session.setAttribute("cvo", cvo);
-				session.setAttribute("id", id);
+			CustomerVo cvo = CustomerDao.loginUser(id, pw);
+			if (cvo !=null) {
+				if (id.equals(cvo.getId()) && pw.equals(cvo.getPassword())) {
+					System.out.println(cvo);
+					session.setAttribute("cvo", cvo);
+					session.setAttribute("id", id);
 //				request.setAttribute("cvo", cvo);
-				url = "loginUser.jsp";
+					url = "loginUser.jsp";
+				} 
 			} else {
-				request.setAttribute("error", "아이디나 비밀번호가 올바르지 않습니다.");
-				url = "/error.jsp";
+				request.setAttribute("error", "아이디 또는 비밀번호 오류");
+				url = "error.jsp";
 			}
 		} catch (SQLException e) {		
 			request.setAttribute("error", "로그인 실패");
@@ -106,7 +108,7 @@ public class CustomerServlet extends HttpServlet {
 			session.setAttribute("cvo", cvo);
 			url = "index.html";
 		} catch (SQLException e) {		
-			request.setAttribute("error", "입력 실패");
+			request.setAttribute("error", "회원가입 실패");
 			url = "error.jsp";
 			e.printStackTrace();
 		}
@@ -135,7 +137,7 @@ public class CustomerServlet extends HttpServlet {
 			url = "index.html";
 			System.out.println(3);
 		} catch (SQLException e) {		
-			request.setAttribute("error", "삭제 실패");
+			request.setAttribute("error", "탈퇴 실패");
 			url = "error.jsp";
 			e.printStackTrace();
 		}

@@ -19,8 +19,11 @@
     		<div class="w3-dropdown-hover">
    				<button class="w3-button w3-hover-gray w3-dropdownn-click">ADMIN</button>
    					<div class="w3-dropdown-content w3-bar-block w3-border w3-whitee">
-     					&nbsp;&nbsp; password<br>&nbsp;&nbsp; <input type = "password" name ="id"><h6></h6>
-     					<button class = "w3-button" location-href='index.html' >로그인</button>
+   						<form action="admin" method="post">
+     						&nbsp;&nbsp; password<br>&nbsp;&nbsp; <input type = "password" name ="pw"><h6></h6>
+     					 	<input type="hidden" name="id" value="admin">
+     						<button class="w3-button" type="submit">로그인</button>
+     					</form>
      				</div>
 				</div> 
      
