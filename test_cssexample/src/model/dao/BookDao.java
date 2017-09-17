@@ -33,8 +33,9 @@ public class BookDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		ArrayList<BookVo>  allList = new ArrayList<>();
-		String sql = "select  * from book,IMGSOURCE where book.IMGNO=IMGSOURCE.IMGNO";
+		String sql = "select  * from book,IMGSOURCE where book.IMGNO=IMGSOURCE.IMGNO and bookno between 1 and 40";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
