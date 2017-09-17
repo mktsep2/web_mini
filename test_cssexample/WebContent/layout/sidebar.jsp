@@ -19,8 +19,11 @@
     		<div class="w3-dropdown-hover">
    				<button class="w3-button w3-hover-gray w3-dropdownn-click">ADMIN</button>
    					<div class="w3-dropdown-content w3-bar-block w3-border w3-whitee">
-     					&nbsp;&nbsp; password<br>&nbsp;&nbsp; <input type = "password" name ="id"><h6></h6>
-     					<button class = "w3-button" location-href='index.html' >로그인</button>
+   						<form action="admin" method="post">
+     						&nbsp;&nbsp; password<br>&nbsp;&nbsp; <input type = "password" name ="pw"><h6></h6>
+     					 	<input type="hidden" name="id" value="admin">
+     						<button class="w3-button" type="submit">로그인</button>
+     					</form>
      				</div>
 				</div> 
      
@@ -40,15 +43,14 @@
 					<div class="w3-section">
 						<label><b>Username</b></label> <input
 							class="w3-input w3-border w3-margin-bottom" type="text"
-							placeholder="Enter Username" name="username" required> 
+							placeholder="Enter Username" name="id" required> 
 						<label><b>Password</b></label>
 						<input class="w3-input w3-border" type="text"
-							placeholder="Enter Password" name="userpw" required>
-						<input type="hidden" name="command" value="allView">
+							placeholder="Enter Password" name="pw" required>
+						<input type="hidden" name="command" value="loginUser">
 						<button class="w3-button w3-block w3-sky w3-section w3-padding w3-round-large w3-hover-gray"
 							type="submit">Login</button>
-						<button class="w3-button w3-block w3-sky w3-section w3-padding w3-round-large w3-hover-gray"
-							type="button" location-href='index.html' >Signup</button>
+							<a href="signupUser.jsp" class="w3-button w3-block w3-sky w3-section w3-padding w3-round-large w3-hover-gray">Signup</a>
 						<input class="w3-check w3-margin-top" type="checkbox"
 							checked="checked"> Remember me
 					</div>
@@ -73,5 +75,6 @@
 
 	<!-- Overlay effect when opening sidebar on small screens -->
 	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
 </body>
 </html>

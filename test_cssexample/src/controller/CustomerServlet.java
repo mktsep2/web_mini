@@ -54,23 +54,26 @@ public class CustomerServlet extends HttpServlet {
 	}
 	
 	public void loginUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("userid").trim();
-		String pw = request.getParameter("userpw").trim();
+		String id = request.getParameter("id").trim();
+		String pw = request.getParameter("pw").trim();
 		HttpSession	session = request.getSession();
 		System.out.println(id);
 		System.out.println(pw);
 		
 		String url = null;	
 		try {			
-			CustomerVo cvo = CustomerDao.loginUser(id, pw);		
-			if (cvo.getId().equals(id) && cvo.getPassword().equals(pw)) {
-				System.out.println(cvo);
-				session.setAttribute("cvo", cvo);
+			CustomerVo cvo = CustomerDao.loginUser(id, pw);
+			if (cvo !=null) {
+				if (id.equals(cvo.getId()) && pw.equals(cvo.getPassword())) {
+					System.out.println(cvo);
+					session.setAttribute("cvo", cvo);
+					session.setAttribute("id", id);
 //				request.setAttribute("cvo", cvo);
-				url = "loginUser.jsp";
+					url = "loginUser.jsp";
+				} 
 			} else {
-				request.setAttribute("error", "아이디나 비밀번호가 올바르지 않습니다.");
-				url = "/error.jsp";
+				request.setAttribute("error", "아이디 또는 비밀번호 오류");
+				url = "error.jsp";
 			}
 		} catch (SQLException e) {		
 			request.setAttribute("error", "로그인 실패");
@@ -98,13 +101,14 @@ public class CustomerServlet extends HttpServlet {
 		String name = request.getParameter("name").trim();
 		String email = request.getParameter("email").trim();		
 		CustomerVo cvo = new CustomerVo(id, password, name, email);
+		HttpSession	session = request.getSession();
 		String url = null;	
 		try {			
 			CustomerDao.insert(cvo);			
-			request.setAttribute("cvo", cvo);
-			url = "view.jsp";
+			session.setAttribute("cvo", cvo);
+			url = "index.html";
 		} catch (SQLException e) {		
-			request.setAttribute("error", "입력 실패");
+			request.setAttribute("error", "회원가입 실패");
 			url = "error.jsp";
 			e.printStackTrace();
 		}
@@ -125,11 +129,15 @@ public class CustomerServlet extends HttpServlet {
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id").trim();
 		String url = null;	
+		System.out.println("탈퇴2");
+		System.out.println("id" + id);
 		try {			
-			CustomerDao.delete(id);			
-			url = "CustomerServlet?command=allView";
+			CustomerDao.delete(id);	
+			System.out.println(2);
+			url = "index.html";
+			System.out.println(3);
 		} catch (SQLException e) {		
-			request.setAttribute("error", "입력 실패");
+			request.setAttribute("error", "탈퇴 실패");
 			url = "error.jsp";
 			e.printStackTrace();
 		}
@@ -150,19 +158,20 @@ public class CustomerServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	public void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String id = request.getParameter("id").trim();
 		String password = request.getParameter("password").trim();
 		String name = request.getParameter("name").trim();
-		String email = request.getParameter("email").trim();		
+		String email = request.getParameter("email").trim();
+		System.out.println("id" + id);
+		HttpSession	session = request.getSession();
 		CustomerVo cvo = new CustomerVo(id, password, name, email);
 		String url = null;	
 		try {			
 			CustomerDao.update(cvo);			
-			request.setAttribute("cvo", cvo);
-			url = "updateSuccess.jsp";
+			session.setAttribute("cvo", cvo);
+			url = "loginUser.jsp";
 		} catch (SQLException e) {		
-			request.setAttribute("error", "입력 실패");
+			request.setAttribute("error", "수정 실패");
 			url = "error.jsp";
 			e.printStackTrace();
 		}

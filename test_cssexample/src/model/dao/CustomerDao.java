@@ -40,6 +40,8 @@ public class CustomerDao {
 			if(rset.next()) {
 				cvo = new CustomerVo(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4));
 			}
+			System.out.println("cvo" + cvo);
+			return cvo;
 			
 		} catch (SQLException s) {
 			s.printStackTrace();
@@ -47,7 +49,6 @@ public class CustomerDao {
 		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}
-		return cvo;
 	}
 
 	public static void insert(CustomerVo cvo) throws SQLException {
