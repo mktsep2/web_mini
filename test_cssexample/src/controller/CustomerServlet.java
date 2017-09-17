@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.dao.BookDao;
 import model.dao.CustomerDao;
+import model.vo.BookVo;
 import model.vo.CustomerVo;
 
 //모든 요청을 받고 처리하는 메인 controller 클래스
@@ -63,9 +65,12 @@ public class CustomerServlet extends HttpServlet {
 		String url = null;	
 		try {			
 			CustomerVo cvo = CustomerDao.loginUser(id, pw);
+			ArrayList<BookVo> allList=BookDao.getBooks();
+			System.out.println(allList);
 			if (cvo !=null) {
 				if (id.equals(cvo.getId()) && pw.equals(cvo.getPassword())) {
 					System.out.println(cvo);
+					session.setAttribute("allList", allList);
 					session.setAttribute("cvo", cvo);
 					session.setAttribute("id", id);
 //				request.setAttribute("cvo", cvo);

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.dao.CustomerDao;
 import model.vo.CustomerVo;
@@ -28,11 +29,12 @@ public class AdminServlet extends HttpServlet {
 		String id= request.getParameter("id");
 		System.out.println(id);
 		System.out.println(pw);
+		HttpSession session=request.getSession();
 		if(pw.equals("1234")&&id.equals("admin")){
 			try {
-				request.setAttribute("id", id);
+				session.setAttribute("id", id);
 				ArrayList<CustomerVo> allList = CustomerDao.getCustomers();
-				request.setAttribute("allList", allList);
+				session.setAttribute("allList", allList);
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

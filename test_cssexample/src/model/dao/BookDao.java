@@ -13,22 +13,10 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import model.vo.BookVo;
+import model.vo.CustomerVo;
 import util.DBUtil;
 
 public class BookDao {
-//	private static DataSource source = null;
-//
-//	static {
-//		try {
-//			Context ctx = new InitialContext();
-//			source = (DataSource) ctx.lookup("java:comp/env/jdbc/myoracle");
-//			System.out.println(source);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	
 	public static ArrayList<BookVo> getBooks() throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -52,19 +40,71 @@ public class BookDao {
 		}
 		return allList;
 	}
-//	private static void close(Connection conn, Statement stmt, ResultSet rset) throws SQLException {
-//		if (conn != null)
-//			conn.close();
-//		if (stmt != null)
-//			stmt.close();
-//		if (rset != null)
-//			rset.close();
-//	}
-//
-//	private static void close(Connection conn, Statement stmt) throws SQLException {
-//		if (conn != null)
-//			conn.close();
-//		if (stmt != null)
-//			stmt.close();
-//	}
+
+	public static void insert(BookVo bvo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)";
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, bvo.getBookno());
+			pstmt.setString(2, bvo.getTitle());
+			pstmt.setString(3, bvo.getSubtitle());
+			pstmt.setString(4, bvo.getBigclass());
+			pstmt.setString(5, bvo.getMinclass());
+			pstmt.setString(6, bvo.getAuthor());
+			pstmt.setString(7, bvo.getCompany());
+			pstmt.setInt(8, bvo.getPyear());
+			pstmt.setString(9,"book"+bvo.getBookno());
+			pstmt.executeUpdate();
+		} catch (SQLException s) {
+			s.printStackTrace();
+			throw s;
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+	}
+
+
+    public static void delete(String id) throws SQLException{
+    	Connection con = null;
+		PreparedStatement pstmt = null;
+		String query = "delete from customer where id=?";
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
+		} catch (SQLException s) {
+			s.printStackTrace();
+			throw s;
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+	}
+
+	public static void update(CustomerVo cvo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String query = "UPDATE customer SET password = ? , email = ? WHERE id = ?";
+		try {
+			con = DBUtil.getConnection();
+
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, cvo.getPassword());
+			pstmt.setString(2, cvo.getEmail());
+			pstmt.setString(3, cvo.getId());
+
+			pstmt.executeQuery();
+
+		} catch (SQLException s) {
+			s.printStackTrace();
+			throw s;
+		} finally {
+			DBUtil.close(con, pstmt);
+		}
+	}
+
+
 }

@@ -46,7 +46,7 @@
 					<tr>
 						<td width="20%">id</td>
 					</tr>	
-					<c:forEach var="cvo" items="${requestScope.allList}">
+					<c:forEach var="cvo" items="${sessionScope.allList}">
 						<tr>
 							<td>${cvo}</td>
 						</tr>
