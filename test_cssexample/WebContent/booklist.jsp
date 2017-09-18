@@ -148,14 +148,14 @@ body {
 			style="width: 100%; font-size: 22px">Close Menu</a>
 		<div class="w3-container">
 			<h3 class="w3-padding-64">
-		<a href="admin.jsp"><b>Kosta_Media<br>Library<br>By_${requestScope.id}님</b></a>
+		<a href="admin.jsp"><b>Kosta_Media<br>Library<br></b></a>
 			</h3>
 		</div>
 		<div class="w3-bar-block">
 			<div class="w3-dropdown-hover">
 				<button class="w3-button w3-hover-gray w3-dropdownn-click">ADMIN</button>
 				<div class="w3-dropdown-content w3-bar-block w3-border w3-whitee">
-					<a href="book" class="w3-bar-item w3-button">도서 목록</a> 
+					<a href="book?command=bookList" class="w3-bar-item w3-button">도서 목록</a> 
 					 <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button">도서 추가</button>
 						 <a href="#" class="w3-bar-item w3-button">도서 수정</a> 
 						 <a href="#" class="w3-bar-item w3-button">도서 삭제</a>
@@ -172,39 +172,40 @@ body {
       class="w3-button w3-display-topright">&times;</span>
       <h2>도서 추가</h2>
     </header>
-			<form class="w3-container" action="book?command=insert">
+			<form class="w3-container" action="book">
 <div class="w3-row">
   <div class="w3-half">
  			 	<p>
-					<label>도서 제목</label> <input class="w3-input" type="text" style="width:50%">
+					<label>도서 제목</label> <input name="title" class="w3-input" type="text" style="width:50%">
 				</p>
   				<p>
-					<label>부 제목</label> <input class="w3-input" type="text" style="width:50%">
+					<label>부 제목</label> <input name="subtitle" class="w3-input" type="text" style="width:50%">
 				</p>
 				<p>
-					<label>대분류</label> <input class="w3-input" type="text"   style="width:50%">
+					<label>대분류</label> <input  name="bigclass" class="w3-input" type="text"   style="width:50%">
 				</p>
 				<p>
-					<label>소분류</label> <input class="w3-input" type="text" style="width:50%">
+					<label>소분류</label> <input name="minclass" class="w3-input" type="text" style="width:50%">
 				</p>
   </div>
   <div class="w3-half">
   	<p>
-					<label>도서 번호</label> <input class="w3-input" type="text"  style="width:50%">
+					<label>도서 번호</label> <input class="w3-input" type="text"  name="bookno" style="width:50%">
 				</p>
 				<p>
-					<label>저자</label> <input class="w3-input" type="text" style="width:50%">
+					<label>저자</label> <input name="author" class="w3-input" type="text" style="width:50%">
 				</p>
 				<p>
-					<label>출판사</label> <input class="w3-input" type="text"  style="width:50%">
+					<label>출판사</label> <input name="company" class="w3-input" type="text"  style="width:50%">
 				</p>
 				<p>
-					<label>출판년도</label> <input class="w3-input" type="text" style="width:50%">
+					<label>출판년도</label> <input name="pyear" class="w3-input" type="text" style="width:50%">
 				</p>
   </div>
 				
 </div>
 			<div class="w3-center">
+			<input type="hidden" name="command" value="bookAdd">
 			<input class="w3-button w3-center-align" type="submit"  style="width:25%" value="전&nbsp&nbsp&nbsp송">
 			</div>
 			</form>

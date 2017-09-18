@@ -23,19 +23,31 @@
 	<nav class="w3-sidebar w3-sky w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
   		<a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hover-gray w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
   		<div class="w3-container">
-    		<h3 class="w3-padding-64"><b>Kosta_Media<br>Library<br>By_${sessionScope.id}님</b></h3>
+    		<h3 class="w3-padding-64"><b>Kosta_Media<br>Library<br></b></h3>
   		</div>
   		<div class="w3-bar-block">
     		<div class="w3-dropdown-hover">
    				<button class="w3-button w3-hover-gray w3-dropdownn-click">ADMIN</button>
    					<div class="w3-dropdown-content w3-bar-block w3-border w3-whitee">
-      					<a href="book?command=list" class="w3-bar-item w3-button">도서 목록</a>
-      					 <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button">도서추가</button>
-      					<a href="#" class="w3-bar-item w3-button">도서 수정</a>
-      					<a href="#" class="w3-bar-item w3-button">도서 삭제</a>
+      					<a href="book?command=bookList" class="w3-bar-item w3-button">도서 목록</a>
+      					 <button onclick="document.getElementById('id01').style.display='block'" class="w3-bar-item w3-button">도서 추가</button>
+      					<form action="addBook.jsp">
+	   						<input type="hidden" name="command" value="bookUpdate">
+	   						<button class="w3-button" type="submit">도서 수정</button>
+	   					</form>
+      					 <button onclick="document.getElementById('id02').style.display='block'" class="w3-bar-item w3-button">도서 삭제</button>
+	   					
+	   					
+<!-- 	   					<form action="book"> -->
+<!-- 	   						<input type="hidden" name="command" value="bookDelete"> -->
+<!-- 	   						<button class="w3-button" type="submit">도서 삭제</button> -->
+<!-- 	   					</form> -->
      				</div>
 				</div> 
   			</div>
+  			<div class="w3-panel" style="">
+  				<a href="index.html">메인이동</a>
+			</div>
 	</nav>
 	
 			<div id="id01" class="w3-modal">
@@ -88,6 +100,21 @@
 
   </div>
 </div>
+
+<div id="id02" class="w3-modal">
+  <div class="w3-modal-content">
+    <header class="w3-container w3-teal"> 
+      <span onclick="document.getElementById('id01').style.display='none'" 
+      class="w3-button w3-display-topright">&times;</span>
+      <h2>도서 삭제</h2>
+    </header>
+			<form class="w3-container" action="book">
+			<input type="text" name="bookno" placeholder="삭제할 도서번호">
+			<input type="hidden" name="command" value="bookDelete">
+			<input class="w3-button w3-center-align" type="submit"  style="width:25%" value="전&nbsp&nbsp&nbsp송">
+			</form>
+  </div>
+</div>
 	
 	
 
@@ -111,11 +138,15 @@
 		<div class="w3-container w3-display-container w3-center" style="margin-top: 80px;" id="showcase">
 			<table class="w3-display-middle" border="1" width="70%">
 				<tr>
-					<td width="20%">id</td>
+					<th width="20%">id</th>
+					<th width="20%">name</th>
+					<th width="20%">email</th>
 				</tr>
 				<c:forEach var="cvo" items="${sessionScope.allList}">
 					<tr>
-						<td>${cvo}</td>
+						<td>${cvo.id}</td>
+						<td>${cvo.name}</td>
+						<td>${cvo.email}</td>
 					</tr>
 				</c:forEach>
 			</table>

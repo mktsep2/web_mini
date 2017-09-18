@@ -92,6 +92,7 @@ public class CustomerDao {
 	public static void update(CustomerVo cvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
 		String query = "UPDATE customer SET password = ? , email = ? WHERE id = ?";
 		try {
 			con = DBUtil.getConnection();

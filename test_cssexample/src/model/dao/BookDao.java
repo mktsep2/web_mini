@@ -23,13 +23,13 @@ public class BookDao {
 		ResultSet rset = null;
 		
 		ArrayList<BookVo>  allList = new ArrayList<>();
-		String sql = "select  * from book,IMGSOURCE where book.IMGNO=IMGSOURCE.IMGNO and bookno between 1 and 40";
+		String sql = "SELECT A.BOOKNO ,REPLACE(A.TITLE,'\"','') TITLE ,A.SUBTITLE ,A.BIGCLASS ,A.MINCLASS ,REPLACE(A.AUTHOR,'\"','') AUTHOR ,REPLACE(A.COMPANY,'\"','') COMPANY ,A.PYEAR ,A.IMGNO ,B.IMGNO ,B.IMGSOURCE FROM BOOK A, IMGSOURCE B WHERE A.IMGNO = B.IMGNO AND A.BOOKNO BETWEEN 1 AND 40";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				allList.add(new BookVo(rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4),rset.getString(5),rset.getString(6),rset.getString(7),rset.getInt(8),rset.getString(11)));
+				allList.add(new BookVo(rset.getInt(1),rset.getString(2), rset.getString(3), rset.getString(4),rset.getString(5),rset.getString(6),rset.getString(7),rset.getInt(8),rset.getString(11)));
 			}
 			System.out.println(allList);
 		} catch (SQLException sqle) {
@@ -41,10 +41,10 @@ public class BookDao {
 		return allList;
 	}
 
-	public static void insert(BookVo bvo) throws SQLException {
+	public static void bookAdd(BookVo bvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String query = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO book VALUES(?,?,?,?,?,?,?,?,?)";
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
@@ -56,7 +56,7 @@ public class BookDao {
 			pstmt.setString(6, bvo.getAuthor());
 			pstmt.setString(7, bvo.getCompany());
 			pstmt.setInt(8, bvo.getPyear());
-			pstmt.setString(9,"book"+bvo.getBookno());
+			pstmt.setString(9, bvo.getImgsource());
 			pstmt.executeUpdate();
 		} catch (SQLException s) {
 			s.printStackTrace();
@@ -67,14 +67,14 @@ public class BookDao {
 	}
 
 
-    public static void delete(String id) throws SQLException{
+    public static void delete(int bookno) throws SQLException{
     	Connection con = null;
 		PreparedStatement pstmt = null;
-		String query = "delete from customer where id=?";
+		String query = "delete from book where bookno=?";
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1,id);
+			pstmt.setInt(1,bookno);
 			pstmt.executeUpdate();
 		} catch (SQLException s) {
 			s.printStackTrace();
@@ -84,17 +84,22 @@ public class BookDao {
 		}
 	}
 
-	public static void update(CustomerVo cvo) throws SQLException {
+	public static void update(BookVo bvo) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String query = "UPDATE customer SET password = ? , email = ? WHERE id = ?";
+		String query = "UPDATE book SET title = ? , subtitle= ? ,bigclass= ? ,minclass= ?,author= ?,company= ?,pyear= ?,imgno=?  WHERE bookno = ?";
 		try {
 			con = DBUtil.getConnection();
-
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, cvo.getPassword());
-			pstmt.setString(2, cvo.getEmail());
-			pstmt.setString(3, cvo.getId());
+			pstmt.setString(1, bvo.getTitle());
+			pstmt.setString(2, bvo.getSubtitle());
+			pstmt.setString(3, bvo.getBigclass());
+			pstmt.setString(4, bvo.getMinclass());
+			pstmt.setString(5, bvo.getAuthor());
+			pstmt.setString(6, bvo.getCompany());
+			pstmt.setInt(7, bvo.getPyear());
+			pstmt.setString(8, bvo.getImgsource());
+			pstmt.setInt(9, bvo.getBookno());
 
 			pstmt.executeQuery();
 

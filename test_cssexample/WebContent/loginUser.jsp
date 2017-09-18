@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 	<%@ include file = "layout/head.jsp" %>
@@ -20,19 +22,21 @@
     		<hr style="width:100%; border:5px solid lightgray" class="w3-round">
    
   			<!-- Photo grid (modal) -->
-  			<div class="w3-row">
-    			<div class="w3-third" >
-      				<img src="images/book758.jpg"  style="width:49%; padding:10px" onclick="onClick(this)" alt="asdasd3<br>짜증난다">
-      				<img src="images/book757.jpg"  style="width:49%; padding:10px" onclick="onClick(this)" alt="Light, white and tight scandinavian design">
-    			</div>
-    			<div  class="w3-third">
-      				<img src="images/book756.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="White walls with designer chairs">
-      				<img src="images/book755.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="Windows for the atrium">
-    			</div>
-      			<div class="w3-third" >
-      				<img src="images/book754.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="Bedroom and office in one space">
-      				<img src="images/book753.jpg" style="width:49%; padding:10px" onclick="onClick(this)" alt="Scandinavian design">
- 				</div>
+    		
+    		<c:forEach items="${sessionScope.allList}" var="bvo" varStatus="status">	
+      				<img src="${bvo.imgsource}"  style="width:30%; padding:30px; text-align: center;" onclick="onClick(this,'${status.index}')" >
+      				<input type="hidden" id="title_${status.index}" name="title_${status.index}" value="${bvo.title}">
+      				<input type="hidden" id="author_${status.index}" name="author_${status.index}" value="${bvo.author}">
+      				<input type="hidden" id="company_${status.index}" name="company_${status.index}" value="${bvo.company}">
+    		</c:forEach>
+<!--     			<div  class="w3-third"> -->
+<!--       				<img src="images/book3.jpg" style="width:49%; padding:10px" onclick="onClick(this)" > -->
+<!--       				<img src="images/book4.jpg" style="width:49%; padding:10px" onclick="onClick(this)" > -->
+<!--     			</div> -->
+<!--       			<div class="w3-third" > -->
+<!--       				<img src="images/book5.jpg" style="width:49%; padding:10px" onclick="onClick(this)" > -->
+<!--       				<img src="images/book6.jpg" style="width:49%; padding:10px" onclick="onClick(this)" > -->
+<!--  				</div> -->
   			</div>
  	 	</div>
 		
@@ -40,19 +44,23 @@
   		<div id="modal01" class="w3-modal" style="padding-top:0" onclick="this.style.display='none'">
     		<span class="w3-button w3-black w3-xxlarge w3-display-topright">&times;</span>
     		<div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-    			<div class="w3-padding w3-display-topmiddle">Top Mid</div>
       			<img id="img01" class="w3-image" style="width:25%">
-       			<table border="1"  width="70%">
-					<tr>
-						<td width="20%">id</td>
-					</tr>	
-					<c:forEach var="cvo" items="${sessionScope.allList}">
-						<tr>
-							<td>${cvo}</td>
-						</tr>
-					</c:forEach>
-				</table>
-    		</div>
+			<table class="w3-table-all w3-card-4 w3-centered w3-border" >
+				<tr>
+						<td>제목</td>				
+						<td id="content1"></td>				
+				</tr>
+				<tr>
+						<td>저자</td>				
+						<td id="content2"></td>				
+				</tr>
+				<tr>
+						<td>출판사</td>				
+						<td id="content3"></td>				
+				</tr>
+			
+			</table>
+			</div>
   		</div>
   		
   		<!-- Services -->
@@ -82,8 +90,11 @@
 		}
 		
 		// Modal Image Gallery
-		function onClick(element) {
+		function onClick(element, index) {
 		  document.getElementById("img01").src = element.src;
+		  document.getElementById("content1").innerHTML=document.getElementById("title_"+index).value;
+		  document.getElementById("content2").innerHTML=document.getElementById("author_"+index).value;
+		  document.getElementById("content3").innerHTML=document.getElementById("company_"+index).value;
 		  document.getElementById("modal01").style.display = "block";
 		  var captionText = document.getElementById("caption");
 		  captionText.innerHTML = element.alt;
